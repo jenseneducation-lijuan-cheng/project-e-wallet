@@ -1,8 +1,8 @@
 <template>
-  <div class="card" v-bind:style="{ backgroundColor: color()}" v-on:click="$emit('visaCard')">
+  <div class="card" v-bind:style="{ backgroundColor: color}" v-on:click="$emit('visaCard')">
     <div class="upper">
-      <img id="pics" v-bind:src="image()" />
-      <img id="chip" v-bind:src="chip()" />
+      <img id="pics" v-bind:src="image" />
+      <img id="chip" v-bind:src="chip" />
     </div>
     <div class="lower">
       <div id="number">{{card.number}}</div>
@@ -33,7 +33,7 @@ export default {
   props: {
     card: Object
   },
-  methods: {
+  computed: {
     color() {
       if (this.card.vendor == "BITCOIN INC") {
         return "gold";
