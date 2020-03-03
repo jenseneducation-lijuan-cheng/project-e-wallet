@@ -10,9 +10,6 @@
         <Card v-bind:card="card" v-on:visaCard="$emit('visa',card)" />
       </div>
     </div>
-    <router-link v-bind:to="'/addcard'">
-      <button id="addNew">ADD A NEW CARD</button>
-    </router-link>
   </div>
 </template>
 <script>
@@ -48,16 +45,5 @@ export default {
   margin: auto;
   display: block;
 }
-#addNew {
-  width: 400px;
-  border: 1px solid black;
-  border-radius: 5px;
-  height: 50px;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 5px;
-  cursor: pointer;
-  text-align: center;
-  margin-bottom: 15px;
-}
+
 </style>

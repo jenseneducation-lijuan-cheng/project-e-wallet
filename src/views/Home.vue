@@ -3,8 +3,13 @@
     <Top v-bind:headline="message" />
     <h6>ACTIVE CARD</h6>
 
-    <Card v-bind:card="active" />
+    <Card v-bind:card="active" v-if="active"/>
+    
     <CardStack v-bind:cards="cards" v-on:visa="visaC" id="allaCards" />
+    <button  @click="remove()">REMOVE ACTIVE CARD</button>
+    <router-link v-bind:to="'/addcard'">
+      <button>ADD A NEW CARD</button>
+    </router-link>
   </div>
 </template>
 
@@ -22,19 +27,24 @@ export default {
   },
   data: () => ({
     message: "E-WALLET",
-    activeCard: 0
+    
   }),
   computed: {
     cards() {
       return this.$root.$data.cards;
     },
     active() {
-      return this.cards[this.activeCard];
+      return this.cards[this.$root.$data.activeCard];
     }
   },
   methods: {
     visaC(card) {
-      this.activeCard = this.cards.indexOf(card);
+      this.$root.$data.activeCard = this.cards.indexOf(card);
+    },
+    remove(){
+      this.$root.$data.cards.splice(this.$root.$data.activeCard, 1);
+      // activeCard = -1 betyder att det inte finns något active card
+      this.$root.$data.activeCard = -1;
     }
   }
 };
@@ -50,5 +60,19 @@ export default {
 }
 #allaCards {
   margin-top: 30px;
+}
+
+button {
+  width: 400px;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 15px;
+  outline: none
 }
 </style>

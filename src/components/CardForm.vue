@@ -1,40 +1,69 @@
 <template>
-  <div class="formA">
+  <form class="formA" v-on:submit.prevent="$emit('add')">
     <label for="number" class="word">CARD NUMBER</label>
 
     <input
       type="text"
       class="name"
       v-model="number"
-      v-on:keyup="card.number=addSpaces(number)"
+      v-on:keyup="card.number= addSpaces(number)"
+      placeholder="x x x x  x x x x  x x x x  x x x x "
+      
+      pattern="^[0-9]{16}$"
       maxlength="16"
+      required
     />
 
     <label for="name" class="word">CARDHOLDER NAME</label>
 
-    <input type="text" class="name" v-model="name" v-on:keyup="card.name=name" />
+    <input
+      type="text"
+      class="name"
+      v-model="name"
+      placeholder="Firstname Lastname"
+      v-on:keyup="card.name=name"
+      pattern="^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\\s])+$"
+      maxlength="25"
+      required
+    />
 
     <div class="password">
       <label for="valid">VALID THRU</label>
 
-      <input type="text" v-model="datum" v-on:keyup="card.valid=datum" maxlength="5" />
+      <input
+        type="text"
+        v-model="datum"
+        v-on:keyup="card.valid=datum"
+        placeholder="x x / x x"
+        maxlength="5"
+        pattern="^(1[0-2]|0[1-9])/[0-9]{2}$"
+        required
+      />
     </div>
     <div class="password">
       <label for="number" id="date">CCV</label>
 
-      <input type="text" v-model="passW" id="date" maxlength="3" />
+      <input
+        type="text"
+        v-model="passW"
+        id="date"
+        placeholder="x x x"
+        maxlength="3"
+        pattern="^[0-9]{3}$"
+        required
+      />
     </div>
 
     <label for="number" class="bank">VENDOR</label>
 
-    <select v-model="selected" v-on:change="card.vendor=selected" class="bank">
+    <select v-model="selected" v-on:change="card.vendor=selected" class="bank" required>
       <option>BITCOIN INC</option>
       <option>NINJA BANK</option>
       <option>BLOCK CHAIN INC</option>
       <option>EVIL CORP</option>
     </select>
-    <button id="more" v-on:click="$emit('add')">ADD CARD</button>
-  </div>
+    <input type="submit" id="more" value="ADD CARD" />
+  </form>
 </template>
 <script>
 export default {
@@ -43,7 +72,7 @@ export default {
     name: "",
     datum: "",
     passW: "",
-    selected: ""
+    selected: "",
   }),
   methods: {
     addSpaces(number) {
@@ -55,7 +84,7 @@ export default {
         }
       }
       return result;
-    }
+    },
   },
   props: {
     card: Object
