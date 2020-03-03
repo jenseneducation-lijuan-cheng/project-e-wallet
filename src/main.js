@@ -12,22 +12,21 @@ new Vue({
     cards: [],
     activeCard: 0
   },
-  created(){
+  created() {
     if (localStorage.getItem("cards")) {
       try {
         this.cards = JSON.parse(localStorage.getItem("cards"));
-        
       } catch (e) {
         localStorage.removeItem("cards");
-      }if (localStorage.getItem("activeCard")) {
+      }
+      if (localStorage.getItem("activeCard")) {
         try {
           this.activeCard = parseInt(localStorage.getItem("activeCard"));
-          
         } catch (e) {
           localStorage.removeItem("activeCard");
         }
       }
-    }/* else {
+    } /* else {
       this.cards = [
         {
           number: "8888 8888 8899 9999",
@@ -59,10 +58,9 @@ new Vue({
   watch: {
     cards(newCards) {
       localStorage.cards = JSON.stringify(newCards);
-
     },
-    activeCard(newCard){
-      localStorage.activeCard = (newCard)
+    activeCard(newCard) {
+      localStorage.activeCard = newCard;
     }
   },
 

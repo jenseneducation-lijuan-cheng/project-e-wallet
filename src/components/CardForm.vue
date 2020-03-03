@@ -6,9 +6,8 @@
       type="text"
       class="name"
       v-model="number"
-      v-on:keyup="card.number= addSpaces(number)"
+      v-on:keyup="card.number=addSpaces(number)"
       placeholder="x x x x  x x x x  x x x x  x x x x "
-      
       pattern="^[0-9]{16}$"
       maxlength="16"
       required
@@ -22,7 +21,7 @@
       v-model="name"
       placeholder="Firstname Lastname"
       v-on:keyup="card.name=name"
-      pattern="^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\\s])+$"
+      pattern="^([a-zA-ZÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ ])+$"
       maxlength="25"
       required
     />
@@ -72,7 +71,7 @@ export default {
     name: "",
     datum: "",
     passW: "",
-    selected: "",
+    selected: ""
   }),
   methods: {
     addSpaces(number) {
@@ -84,7 +83,7 @@ export default {
         }
       }
       return result;
-    },
+    }
   },
   props: {
     card: Object
